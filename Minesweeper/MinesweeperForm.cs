@@ -39,11 +39,11 @@ namespace Minesweeper
             Pen p = new Pen(Brushes.Blue);
             p.Color = System.Drawing.Color.LightGray;
             p.Width = 8;
-            g.DrawLine(p, new Point(2, 30), new Point(347, 30));
+            g.DrawLine(p, new Point(2, 30), new Point(357, 30));
 
             Pen p0 = new Pen(Brushes.Blue);
             p0.Color = System.Drawing.Color.Gray;
-            g.DrawLine(p0, new Point(2, 33), new Point(347, 33));
+            g.DrawLine(p0, new Point(2, 33), new Point(357, 33));
 
             Pen p00 = new Pen(Brushes.Blue);
             p00.Color = System.Drawing.Color.Gray;
@@ -61,22 +61,22 @@ namespace Minesweeper
             Pen p2 = new Pen(Brushes.Blue);
             p2.Color = System.Drawing.Color.LightGray;
             p2.Width = 6;
-            g.DrawLine(p2, new Point(2, 400), new Point(347, 400));
+            g.DrawLine(p2, new Point(2, 400), new Point(357, 400));
 
             Pen p3 = new Pen(Brushes.Blue);
             p3.Color = System.Drawing.Color.LightGray;
             p3.Width = 6;
-            g.DrawLine(p3, new Point(344, 400), new Point(344, 30));
+            g.DrawLine(p3, new Point(354, 400), new Point(354, 30));
 
             Pen p4 = new Pen(Brushes.Blue);
             p4.Color = System.Drawing.Color.LightGray;
             p4.Width = 7;
-            g.DrawLine(p4, new Point(2, 70), new Point(347, 70));
+            g.DrawLine(p4, new Point(2, 70), new Point(357, 70));
 
             Pen p5 = new Pen(Brushes.Blue);
             p5.Color = System.Drawing.Color.LightGray;
             p5.Width = 32;
-            g.DrawLine(p5, new Point(10, 50), new Point(340, 50));
+            g.DrawLine(p5, new Point(10, 50), new Point(350, 50));
 
             
 
@@ -110,6 +110,11 @@ namespace Minesweeper
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pb_Click(object sender, EventArgs e)
+        {
+            //(sender as PictureBox).Image = 
         }
     }
 }

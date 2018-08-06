@@ -1,4 +1,7 @@
-﻿namespace Minesweeper
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace Minesweeper
 {
     partial class MinesweeperForm
     {
@@ -36,7 +39,10 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pb = new System.Windows.Forms.PictureBox();
+            Dictionary<int, PictureBox> dict = new Dictionary<int, PictureBox>();
+            for (int i=0;i<272;i++) {
+                dict.Add(i, new System.Windows.Forms.PictureBox());
+            }
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -44,6 +50,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            int ii = 0;
+            int n = 0;
+            int m = 0;
+            foreach (KeyValuePair<int, PictureBox> kvp in dict)
+            {
+                n++;
+                
+                ((System.ComponentModel.ISupportInitialize)(kvp.Value)).BeginInit();
+                // 
+                // pb
+                // 
+                kvp.Value.Image = ((System.Drawing.Image)(resources.GetObject("pb.Image")));
+                kvp.Value.Location = new System.Drawing.Point(10+ii, 75+m);
+                kvp.Value.Size = new System.Drawing.Size(20, 20);
+                kvp.Value.Name = "pb" + n;
+                kvp.Value.TabStop = false;
+                kvp.Value.Click += new System.EventHandler(this.pb_Click);
+                this.Controls.Add(kvp.Value);
+                ((System.ComponentModel.ISupportInitialize)(kvp.Value)).EndInit();
+                ii = ii + 20;
+                if (n % 17 == 0)
+                {
+                    ii = 0;
+                    m = m + 20;
+                }
+            }
+            
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -104,22 +137,14 @@
             this.pictureBox7.Size = new System.Drawing.Size(14, 24);
             this.pictureBox7.TabIndex = 5;
             this.pictureBox7.TabStop = false;
-            // 
-            // pb
-            // 
-            this.pb.Image = ((System.Drawing.Image)(resources.GetObject("pb.Image")));
-            this.pb.Location = new System.Drawing.Point(10, 75);
-            this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(20, 20);
-            this.pb.TabIndex = 1;
-            this.pb.TabStop = false;
+            
             // 
             // MinesweeperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(347, 404);
+            this.ClientSize = new System.Drawing.Size(358, 404);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox4);
@@ -127,7 +152,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pb);
+           
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.Name = "MinesweeperForm";
             this.Text = "Form1";
@@ -140,6 +165,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            
             this.ResumeLayout(false);
 
         }
@@ -153,7 +179,6 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pb;
     }
 }
 
