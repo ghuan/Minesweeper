@@ -7,5 +7,4 @@ D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompil
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.MinesweeperForm.resources
-D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.UserControl1.resources
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csprojAssemblyReference.cache
