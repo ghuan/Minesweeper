@@ -31,6 +31,14 @@ namespace Minesweeper
         private static Rectangle mineImageDownRec = new Rectangle(0, 300, (24 - 0), 24);
         private static Rectangle mineRec = new Rectangle(0, 60, (24 - 0), 24);
         private static Rectangle mineRec1 = new Rectangle(0, 100, (24 - 0), 24);
+        private static Rectangle mineCount1Rec = new Rectangle(0, 280, (24 - 0), 24);
+        private static Rectangle mineCount2Rec = new Rectangle(0, 260, (24 - 0), 24);
+        private static Rectangle mineCount3Rec = new Rectangle(0, 240, (24 - 0), 24);
+        private static Rectangle mineCount4Rec = new Rectangle(0, 220, (24 - 0), 24);
+        private static Rectangle mineCount5Rec = new Rectangle(0, 200, (24 - 0), 24);
+        private static Rectangle mineCount6Rec = new Rectangle(0, 180, (24 - 0), 24);
+        private static Rectangle mineCount7Rec = new Rectangle(0, 160, (24 - 0), 24);
+        private static Rectangle mineCount8Rec = new Rectangle(0, 120, (24 - 0), 24);
 
         public static Image startFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, startFace);
         public static Image pressFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, pressFace);
@@ -53,6 +61,14 @@ namespace Minesweeper
         public static Image mineDownImage = AcquireRectangleImage(Properties.Resources.Mines, mineImageDownRec);
         public static Image minImage = AcquireRectangleImage(Properties.Resources.Mines, mineRec);
         public static Image minImage1 = AcquireRectangleImage(Properties.Resources.Mines, mineRec1);
+        public static Image mineCount1Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount1Rec);
+        public static Image mineCount2Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount2Rec);
+        public static Image mineCount3Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount3Rec);
+        public static Image mineCount4Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount4Rec);
+        public static Image mineCount5Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount5Rec);
+        public static Image mineCount6Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount6Rec);
+        public static Image mineCount7Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount7Rec);
+        public static Image mineCount8Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount8Rec);
         /// <summary>
         /// 截取图像的矩形区域
         /// </summary>
@@ -119,6 +135,29 @@ namespace Minesweeper
             
             Rectangle timeImageRec = new Rectangle(0, y, (14 - 0), 24);
             return AcquireRectangleImage(Properties.Resources.Digits, timeImageRec);
+        }
+
+        public static Image getMineCountImage(int count) {
+            switch (count) {
+                case 1:
+                    return mineCount1Image;
+                case 2:
+                    return mineCount2Image;
+                case 3:
+                    return mineCount3Image;
+                case 4:
+                    return mineCount4Image;
+                case 5:
+                    return mineCount5Image;
+                case 6:
+                    return mineCount6Image;
+                case 7:
+                    return mineCount7Image;
+                case 8:
+                    return mineCount8Image;
+            }
+            return null;
+                 
         }
 
         public static void writeLog(string str)
