@@ -16,6 +16,8 @@ namespace Minesweeper
         private static Rectangle failFace = new Rectangle(0, 48, (24 - 0), (24 - 0));
         private static Rectangle successFace = new Rectangle(0, 24, (24 - 0), (24 - 0));
 
+        private static Rectangle timeImageRecF = new Rectangle(0, 0, (14 - 0), 24);
+        private static Rectangle timeImageRecNull = new Rectangle(0, 22, (14 - 0), 24);
         private static Rectangle timeImageRec0 = new Rectangle(0, 252, (14 - 0), 24);
         private static Rectangle timeImageRec1 = new Rectangle(0, 229, (14 - 0), 24);
         private static Rectangle timeImageRec2 = new Rectangle(0, 206, (14 - 0), 24);
@@ -28,8 +30,11 @@ namespace Minesweeper
         private static Rectangle timeImageRec9 = new Rectangle(0, 45, (14 - 0), 24);
 
         private static Rectangle mineImageRec = new Rectangle(0, 0, (24 - 0), 24);
+        private static Rectangle mineTagImageRec = new Rectangle(0, 20, (24 - 0), 24);
+        private static Rectangle mineQImageRec = new Rectangle(0, 40, (24 - 0), 24);
         private static Rectangle mineImageDownRec = new Rectangle(0, 300, (24 - 0), 24);
         private static Rectangle mineRec = new Rectangle(0, 60, (24 - 0), 24);
+        private static Rectangle mineRec2 = new Rectangle(0, 80, (24 - 0), 24);
         private static Rectangle mineRec1 = new Rectangle(0, 100, (24 - 0), 24);
         private static Rectangle mineCount1Rec = new Rectangle(0, 280, (24 - 0), 24);
         private static Rectangle mineCount2Rec = new Rectangle(0, 260, (24 - 0), 24);
@@ -46,6 +51,8 @@ namespace Minesweeper
         public static Image successFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, successFace);
         public static Image failFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, failFace);
 
+        public static Image timeImageF = AcquireRectangleImage(Properties.Resources.Digits, timeImageRecF);
+        public static Image timeImageNull = AcquireRectangleImage(Properties.Resources.Digits, timeImageRecNull);
         public static Image timeImage0 = AcquireRectangleImage(Properties.Resources.Digits, timeImageRec0);
         public static Image timeImage1 = AcquireRectangleImage(Properties.Resources.Digits, timeImageRec1);
         public static Image timeImage2 = AcquireRectangleImage(Properties.Resources.Digits, timeImageRec2);
@@ -58,9 +65,12 @@ namespace Minesweeper
         public static Image timeImage9 = AcquireRectangleImage(Properties.Resources.Digits, timeImageRec9);
 
         public static Image mineImage = AcquireRectangleImage(Properties.Resources.Mines, mineImageRec);
+        public static Image mineTagImage = AcquireRectangleImage(Properties.Resources.Mines, mineTagImageRec);
+        public static Image mineQImage = AcquireRectangleImage(Properties.Resources.Mines, mineQImageRec);
         public static Image mineDownImage = AcquireRectangleImage(Properties.Resources.Mines, mineImageDownRec);
         public static Image minImage = AcquireRectangleImage(Properties.Resources.Mines, mineRec);
         public static Image minImage1 = AcquireRectangleImage(Properties.Resources.Mines, mineRec1);
+        public static Image minImage2 = AcquireRectangleImage(Properties.Resources.Mines, mineRec2);
         public static Image mineCount1Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount1Rec);
         public static Image mineCount2Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount2Rec);
         public static Image mineCount3Image = AcquireRectangleImage(Properties.Resources.Mines, mineCount3Rec);
@@ -90,6 +100,40 @@ namespace Minesweeper
                 grSmall.Dispose();
             }
             return bmSmall;
+        }
+        public static int getMineCount(Image image) {
+            if (image == mineCount1Image) {
+                return 1;
+            }
+            if (image == mineCount2Image)
+            {
+                return 2;
+            }
+            if (image == mineCount3Image)
+            {
+                return 3;
+            }
+            if (image == mineCount4Image)
+            {
+                return 4;
+            }
+            if (image == mineCount5Image)
+            {
+                return 5;
+            }
+            if (image == mineCount6Image)
+            {
+                return 6;
+            }
+            if (image == mineCount7Image)
+            {
+                return 7;
+            }
+            if (image == mineCount8Image)
+            {
+                return 8;
+            }
+            return 0;
         }
         public static Image getTimeImage(int time) {
             int y = 0;

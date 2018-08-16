@@ -153,6 +153,7 @@ namespace Minesweeper
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.MaximizeBox = false;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(537, 458);
@@ -193,6 +194,8 @@ namespace Minesweeper
         private System.Windows.Forms.PictureBox pictureBox7;
         private int gameState = 0;
         private int gameTime = 0;
+        private int mineTotal = 100;
+        private int staticMineTotal = 0;
     }
 }
 
