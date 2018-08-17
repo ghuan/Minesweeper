@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Minesweeper
@@ -196,6 +197,7 @@ namespace Minesweeper
         private int gameTime = 0;
         private int mineTotal = 100;
         private int staticMineTotal = 0;
+        private Dictionary<int, Image> dict11;
     }
 }
 

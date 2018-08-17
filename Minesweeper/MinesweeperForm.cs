@@ -141,7 +141,31 @@ namespace Minesweeper
             }
             else if (e.Button == MouseButtons.Middle)
             {
-
+                if ((sender as PictureBox).Image != ImageUtil.mineImage && (sender as PictureBox).Image != ImageUtil.mineQImage && (sender as PictureBox).Image != ImageUtil.mineTagImage && (sender as PictureBox).Image != ImageUtil.mineDownImage)
+                {
+                    int thisMines = ImageUtil.getMineCount((sender as PictureBox).Image);
+                    int mine = int.Parse((sender as PictureBox).Name);
+                    if (thisMines != 0)
+                    {
+                        int[] aroundMines = getAroundMines(mine);
+                        dict11 = new Dictionary<int, Image>();
+                        foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                        {
+                            foreach (int b in aroundMines)
+                            {
+                                if (kvp.Value.Name.Equals(b + ""))
+                                {
+                                    if (kvp.Value.Image == ImageUtil.mineImage || kvp.Value.Image == ImageUtil.mineQImage)
+                                    {
+                                        dict11.Add(b, kvp.Value.Image);
+                                        kvp.Value.Image = ImageUtil.mineDownImage;
+                                    }
+                                   
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             }
@@ -260,6 +284,16 @@ namespace Minesweeper
                     int mine = int.Parse((sender as PictureBox).Name);
                     if (thisMines != 0) {
                         int[] aroundMines = getAroundMines(mine);
+                        foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                        {
+                            foreach (KeyValuePair<int, Image> kvp1 in dict11) {
+                                if (kvp.Value.Name.Equals(""+kvp1.Key)) {
+                                    kvp.Value.Image = kvp1.Value;
+                                }
+                            }
+                            
+
+                        }
                         int count = 0;
                         int num = 0;
                         Dictionary<int, PictureBox> dict1 = new Dictionary<int, PictureBox>();
@@ -269,6 +303,7 @@ namespace Minesweeper
                                 if (kvp.Value.Name.Equals(b + ""))
                                 {
                                     num++;
+                                    
                                     if (kvp.Value.Image == ImageUtil.mineTagImage)
                                     {
                                         count++;
