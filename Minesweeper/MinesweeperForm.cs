@@ -267,9 +267,9 @@ namespace Minesweeper
                         checkMine(sender);
                         if (checkSuccess()) {
                             this.pictureBox1.Image = ImageUtil.successFaceImage;
-                            MessageBox.Show("恭喜您，通关成功！");
                             timer.Stop();
                             this.gameState = 2;
+                            MessageBox.Show("恭喜您，通关成功！");
                         }
                     }
                 }
@@ -394,9 +394,10 @@ namespace Minesweeper
                 if (checkSuccess())
                 {
                     this.pictureBox1.Image = ImageUtil.successFaceImage;
-                    MessageBox.Show("恭喜您，通关成功！");
+                   
                     timer.Stop();
                     this.gameState = 2;
+                    MessageBox.Show("恭喜您，通关成功！");
                 }
             }
         }
