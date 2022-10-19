@@ -117,20 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Digits" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\digits.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Face4Bit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\face4bit.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Mine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mine.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Mines" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mines.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Set" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\set.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAGACvAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAAFz
+        UkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACRElEQVQ4T3VTX0ia
+        URw96FawMWJgwnpoG6yXyQhiEsj6A4VC5Is9RCFBkMQomBHzqRq5p8iysenmoh6CTZm9KEFEgiEEEQQ9
+        9zqC6CFY5abp9515vzv9JtKFC/e7v985937nnAveMr58trCpCdqcnXt0WxuhV1SurVn5J/dL2xodvcP1
+        dXB7G3Q4ZJuiFBiLhaiqagWmVRTlhkNDRo6Nga2toN9v5swMeHoKXlyA8/Pg3DsTOzpAjwfs7HrJYrGg
+        kWgEsaidbrdYgsfHqIBlWSfJZOT39DQYCL7SCQqF3+zpAVMp2SDm4SE4OQmOj4O7u/r+0RHY1gbm83md
+        QKzCoRecmNDBViv48ZOFkYiFvb3g1pasLSyAb333dA1Wgk85OGjQwGdn8mQBVlSlSvm+PkkiNBEkbreR
+        gcBjwmQCo1EJFieIK4cjnTW2pVMeCpKyJhsbYF0dJEE8Dp6fy6JQObJqqyHIpF//sxO8ugJ3dsD6+hLB
+        4mIzBwYMmmCCZH8ftNlQ5bVgc7kM3NyU4GAQtNtBn69BD1I49FwjEbfY2wO7usBv3x2M/3DS6YQGFjUB
+        fuNtqA1Sfz+YTOp2CZKREXB4GEwkqu0VImezP3UbkwlX6Tdk08lJKSQBXVSxd3kJLi+DBweyR6TU/75Z
+        J1CK+ZKVRnq9YEuLSNqDCkkZPDV1n+3tMoVCo1zuujpIasn3DyvPeJ2Vj8njuVsKEZhOg93d8jGJxC4t
+        PeFNQaZQjP9eY7Vzq18tNJvBxkah9sMaW8sbfwE9fdJa1InYBAAAAABJRU5ErkJggg==
+</value>
   </data>
 </root>

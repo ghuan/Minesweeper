@@ -8,3 +8,13 @@ D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.MinesweeperForm.resources
 D:\Workspaces\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csprojAssemblyReference.cache
+D:\workspace\c#\Minesweeper\Minesweeper\bin\Debug\Minesweeper.exe.config
+D:\workspace\c#\Minesweeper\Minesweeper\bin\Debug\Minesweeper.exe
+D:\workspace\c#\Minesweeper\Minesweeper\bin\Debug\Minesweeper.pdb
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.MinesweeperForm.resources
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.Properties.Resources.resources
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.GenerateResource.cache
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompileInputs.cache
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.UserSetForm.resources

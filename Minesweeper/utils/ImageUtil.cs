@@ -16,6 +16,10 @@ namespace Minesweeper
         private static Rectangle failFace = new Rectangle(0, 48, (24 - 0), (24 - 0));
         private static Rectangle successFace = new Rectangle(0, 24, (24 - 0), (24 - 0));
 
+        private static Rectangle pressSet = new Rectangle(0, 0, (24 - 0), (24 - 0));
+        private static Rectangle defaultSet = new Rectangle(0, 24, (24 - 0), (24 - 0));
+
+
         private static Rectangle timeImageRecF = new Rectangle(0, 0, (14 - 0), 24);
         private static Rectangle timeImageRecNull = new Rectangle(0, 22, (14 - 0), 24);
         private static Rectangle timeImageRec0 = new Rectangle(0, 252, (14 - 0), 24);
@@ -43,13 +47,17 @@ namespace Minesweeper
         private static Rectangle mineCount5Rec = new Rectangle(0, 200, (24 - 0), 24);
         private static Rectangle mineCount6Rec = new Rectangle(0, 180, (24 - 0), 24);
         private static Rectangle mineCount7Rec = new Rectangle(0, 160, (24 - 0), 24);
-        private static Rectangle mineCount8Rec = new Rectangle(0, 120, (24 - 0), 24);
+        private static Rectangle mineCount8Rec = new Rectangle(0, 140, (24 - 0), 24);
 
         public static Image startFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, startFace);
         public static Image pressFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, pressFace);
         public static Image frontFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, frontFace);
         public static Image successFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, successFace);
         public static Image failFaceImage = AcquireRectangleImage(Properties.Resources.Face4Bit, failFace);
+
+        public static Image pressSetImage = AcquireRectangleImage(Properties.Resources.Set, pressSet);
+        public static Image defaultSetImage = AcquireRectangleImage(Properties.Resources.Set, defaultSet);
+
 
         public static Image timeImageF = AcquireRectangleImage(Properties.Resources.Digits, timeImageRecF);
         public static Image timeImageNull = AcquireRectangleImage(Properties.Resources.Digits, timeImageRecNull);
@@ -82,7 +90,7 @@ namespace Minesweeper
         /// <summary>
         /// 截取图像的矩形区域
         /// </summary>
-        /// <param name="source">源图像对应picturebox1</param>
+        /// <param name="source">源图像对应faceBox</param>
         /// <param name="rect">矩形区域，如上初始化的rect</param>
         /// <returns>矩形区域的图像</returns>
         public static Image AcquireRectangleImage(Image source, Rectangle rect)

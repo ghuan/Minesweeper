@@ -10,7 +10,6 @@ namespace Minesweeper
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        Dictionary<int, PictureBox> dict = new Dictionary<int, PictureBox>();
 
         /// <summary>
         /// 清理所有正在使用的资源。
@@ -24,6 +23,7 @@ namespace Minesweeper
             }
             base.Dispose(disposing);
         }
+        
 
         #region Windows 窗体设计器生成的代码
 
@@ -33,171 +33,177 @@ namespace Minesweeper
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox33 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            for (int i = 0; i < 520; i++)
-            {
-                dict.Add(i, new System.Windows.Forms.PictureBox());
-            }
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox33)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            int ii = 0;
-            int n = 0;
-            int m = 0;
-            foreach (KeyValuePair<int, PictureBox> kvp in dict)
-            {
-                n++;
-
-                ((System.ComponentModel.ISupportInitialize)(kvp.Value)).BeginInit();
-                // 
-                // pb
-                // 
-                kvp.Value.Image = ((System.Drawing.Image)(ImageUtil.mineImage));
-                kvp.Value.Location = new System.Drawing.Point(10 + ii, 50 + m);
-                kvp.Value.Size = new System.Drawing.Size(20, 20);
-                kvp.Value.Name = "" + n;
-                kvp.Value.TabStop = false;
-                kvp.Value.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pb_MouseDown);
-                kvp.Value.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pb_MouseUp);
-                this.Controls.Add(kvp.Value);
-                ((System.ComponentModel.ISupportInitialize)(kvp.Value)).EndInit();
-                ii = ii + 20;
-                if (n % 26 == 0)
-                {
-                    ii = 0;
-                    m = m + 20;
-                }
-            }
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinesweeperForm));
+            this.minesSet = new MinesSet();
+            this.minesSet.addObserver(this);
+            this.faceBox = new System.Windows.Forms.PictureBox();
+            this.setBox = new System.Windows.Forms.PictureBox();
+            this.mineNumOneBox = new System.Windows.Forms.PictureBox();
+            this.mineNumTenBox = new System.Windows.Forms.PictureBox();
+            this.mineNumHundredBox = new System.Windows.Forms.PictureBox();
+            this.secondOneBox = new System.Windows.Forms.PictureBox();
+            this.secondTenBox = new System.Windows.Forms.PictureBox();
+            this.secondHundredBox = new System.Windows.Forms.PictureBox();
+            this.secondThousandBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.faceBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.setBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mineNumOneBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mineNumTenBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mineNumHundredBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondOneBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondTenBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondHundredBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondThousandBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // faceBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(246, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(25, 24);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.faceBox.Location = new System.Drawing.Point(0, 0);
+            this.faceBox.Name = "faceBox";
+            this.faceBox.Size = new System.Drawing.Size(25, 24);
+            this.faceBox.TabIndex = 0;
+            this.faceBox.TabStop = false;
+            this.faceBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.faceBox_MouseDown);
+            this.faceBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.faceBox_MouseUp);
             // 
-            // pictureBox2
+            // setBox
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(48, 13);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.setBox.Location = new System.Drawing.Point(0, 0);
+            this.setBox.Name = "setBox";
+            this.setBox.Size = new System.Drawing.Size(25, 24);
+            this.setBox.TabIndex = 0;
+            this.setBox.TabStop = false;
+            this.setBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.setBox_MouseDown);
+            this.setBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.setBox_MouseUp);
             // 
-            // pictureBox3
+            // mineNumOneBox
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(61, 13);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
+            this.mineNumOneBox.Location = new System.Drawing.Point(18, 13);
+            this.mineNumOneBox.Name = "mineNumOneBox";
+            this.mineNumOneBox.Size = new System.Drawing.Size(14, 24);
+            this.mineNumOneBox.TabIndex = 1;
+            this.mineNumOneBox.TabStop = false;
             // 
-            // pictureBox33
+            // mineNumTenBox
             // 
-            this.pictureBox33.Location = new System.Drawing.Point(75, 13);
-            this.pictureBox33.Name = "pictureBox33";
-            this.pictureBox33.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox33.TabIndex = 2;
-            this.pictureBox33.TabStop = false;
+            this.mineNumTenBox.Location = new System.Drawing.Point(31, 13);
+            this.mineNumTenBox.Name = "mineNumTenBox";
+            this.mineNumTenBox.Size = new System.Drawing.Size(14, 24);
+            this.mineNumTenBox.TabIndex = 2;
+            this.mineNumTenBox.TabStop = false;
             // 
-            // pictureBox4
+            // mineNumHundredBox
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(444, 13);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox4.TabIndex = 4;
-            this.pictureBox4.TabStop = false;
+            this.mineNumHundredBox.Location = new System.Drawing.Point(44, 13);
+            this.mineNumHundredBox.Name = "mineNumHundredBox";
+            this.mineNumHundredBox.Size = new System.Drawing.Size(14, 24);
+            this.mineNumHundredBox.TabIndex = 2;
+            this.mineNumHundredBox.TabStop = false;
             // 
-            // pictureBox5
+            // secondOneBox
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(431, 13);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox5.TabIndex = 3;
-            this.pictureBox5.TabStop = false;
+            this.secondOneBox.Location = new System.Drawing.Point(0, 0);
+            this.secondOneBox.Name = "secondOneBox";
+            this.secondOneBox.Size = new System.Drawing.Size(14, 24);
+            this.secondOneBox.TabIndex = 6;
+            this.secondOneBox.TabStop = false;
             // 
-            // pictureBox6
+            // secondTenBox
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(470, 13);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox6.TabIndex = 6;
-            this.pictureBox6.TabStop = false;
+            this.secondTenBox.Location = new System.Drawing.Point(0, 0);
+            this.secondTenBox.Name = "secondTenBox";
+            this.secondTenBox.Size = new System.Drawing.Size(14, 24);
+            this.secondTenBox.TabIndex = 5;
+            this.secondTenBox.TabStop = false;
             // 
-            // pictureBox7
+            // secondHundredBox
             // 
-            this.pictureBox7.Location = new System.Drawing.Point(457, 13);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(14, 24);
-            this.pictureBox7.TabIndex = 5;
-            this.pictureBox7.TabStop = false;
+            this.secondHundredBox.Location = new System.Drawing.Point(0, 0);
+            this.secondHundredBox.Name = "secondHundredBox";
+            this.secondHundredBox.Size = new System.Drawing.Size(14, 24);
+            this.secondHundredBox.TabIndex = 4;
+            this.secondHundredBox.TabStop = false;
+            // 
+            // secondThousandBox
+            // 
+            this.secondThousandBox.Location = new System.Drawing.Point(0, 0);
+            this.secondThousandBox.Name = "secondThousandBox";
+            this.secondThousandBox.Size = new System.Drawing.Size(14, 24);
+            this.secondThousandBox.TabIndex = 3;
+            this.secondThousandBox.TabStop = false;
             // 
             // MinesweeperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.MaximizeBox = false;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(537, 458);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox33);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.secondOneBox);
+            this.Controls.Add(this.secondTenBox);
+            this.Controls.Add(this.secondHundredBox);
+            this.Controls.Add(this.secondThousandBox);
+            this.Controls.Add(this.mineNumOneBox);
+            this.Controls.Add(this.mineNumTenBox);
+            this.Controls.Add(this.mineNumHundredBox);
+            this.Controls.Add(this.faceBox);
+            this.Controls.Add(this.setBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.MaximizeBox = false;
             this.Name = "MinesweeperForm";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "扫雷";
             this.Load += new System.EventHandler(this.MinesweeperForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MinesweeperForm_Paint);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox33)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faceBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.setBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mineNumOneBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mineNumTenBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mineNumHundredBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondOneBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondTenBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondHundredBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.secondThousandBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        #endregion
+        #endregion        
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox33;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox faceBox;
+        private System.Windows.Forms.PictureBox setBox;
+        private System.Windows.Forms.PictureBox mineNumOneBox;
+        private System.Windows.Forms.PictureBox mineNumTenBox;
+        private System.Windows.Forms.PictureBox mineNumHundredBox;
+        private System.Windows.Forms.PictureBox secondHundredBox;
+        private System.Windows.Forms.PictureBox secondThousandBox;
+        private System.Windows.Forms.PictureBox secondOneBox;
+        private System.Windows.Forms.PictureBox secondTenBox;
+        //游戏状态 0未开始 1进行中 2结束
         private int gameState = 0;
+        //游戏时间
         private int gameTime = 0;
-        private int mineTotal = 100;
-        private int staticMineTotal = 0;
-        private Dictionary<int, Image> dict11;
+        //游戏设置
+        public MinesSet minesSet;
+        //雷区PictureBox缓存
+        private Dictionary<int, PictureBox> minesDict = new Dictionary<int, PictureBox>();
+        //当前地雷数
+        private int currentTotalMines;
+        //初始化地雷数
+        private int initTotalMines;
+        //初始化雷区（包括无雷区）
+        private int[] initMinesMap;
+        //初始化雷区
+        private int[] initMines;
+        //配置文件名
+        public string setFileName = "set.ini";
+        public string defaultSetIniFileSection = "default";
+        //设置窗口
+        private UserSetForm userSetForm;
+
+        private Dictionary<int, Image> dictTmp;
     }
+
 }
 

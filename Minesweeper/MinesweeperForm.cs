@@ -11,10 +11,9 @@ using System.Windows.Forms;
 
 namespace Minesweeper
 {
-    public partial class MinesweeperForm : Form
+    public partial class MinesweeperForm : Form,UserSetObserver
     {
         System.Timers.Timer timer = new System.Timers.Timer();
-        int[] mines = new int[520];
         public MinesweeperForm()
         {
             InitializeComponent();
@@ -23,108 +22,119 @@ namespace Minesweeper
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void MinesweeperForm_Load(object sender, EventArgs e)
         {
-          
-            
+            this.faceBox.Image = ImageUtil.startFaceImage;
+            this.setBox.Image = ImageUtil.defaultSetImage;
+
+            //this.mineNumOneBox.Image = ImageUtil.timeImage1;
+            //this.mineNumTenBox.Image = ImageUtil.timeImage5;
+            //this.mineNumHundredBox.Image = ImageUtil.timeImage0;
+            mineCount();
+            this.secondHundredBox.Image = ImageUtil.timeImage0;
+            this.secondThousandBox.Image = ImageUtil.timeImage0;
+            this.secondOneBox.Image = ImageUtil.timeImage0;
+            this.secondTenBox.Image = ImageUtil.timeImage0;
+
+            try {
+                //读取配置文件
+                Dictionary<String, String> minesSysSet = OperateIniFile.ReadIniDataAll(this.defaultSetIniFileSection, AppDomain.CurrentDomain.BaseDirectory + "\\" + this.setFileName);
+                this.minesSet.set(minesSysSet);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
+           
         }
 
-        
+        /**
+         * form边框 画线
+         * **/
         private void MinesweeperForm_Paint(object sender, PaintEventArgs e)
 
         {
-            Graphics g = e.Graphics;
+            e.Graphics.Clear(Color.White);
+            int widthOther = 17;
+            int heightOther = 56;
+            int width = this.minesSet.XCount * 20;
+            int height = this.minesSet.YCount * 20;
+            
+            Graphics g = this.CreateGraphics();
+            
             Pen p = new Pen(Brushes.Blue);
             p.Color = System.Drawing.Color.LightGray;
             p.Width = 8;
-            g.DrawLine(p, new Point(2,5), new Point(537, 5));
+            g.DrawLine(p, new Point(2,5), new Point(width+widthOther, 5));
 
             Pen p0 = new Pen(Brushes.Blue);
             p0.Color = System.Drawing.Color.Gray;
-            g.DrawLine(p0, new Point(2, 8), new Point(537, 8));
+            g.DrawLine(p0, new Point(2, 8), new Point(width + widthOther, 8));
 
             Pen p00 = new Pen(Brushes.Blue);
             p00.Color = System.Drawing.Color.Gray;
-            g.DrawLine(p00, new Point(2, 49), new Point(530, 49));
+            g.DrawLine(p00, new Point(2, 49), new Point(width + widthOther-7, 49));
 
             Pen p1 = new Pen(Brushes.Blue);
             p1.Color = System.Drawing.Color.LightGray;
             p1.Width = 8;
-            g.DrawLine(p1, new Point(6, 5), new Point(6, 456));
+            g.DrawLine(p1, new Point(6, 5), new Point(6, height+heightOther));
 
             Pen p11 = new Pen(Brushes.Blue);
             p11.Color = System.Drawing.Color.Gray;
-            g.DrawLine(p11, new Point(9, 8), new Point(9, 457));
+            g.DrawLine(p11, new Point(9, 8), new Point(9, height + heightOther+1));
 
             Pen p2 = new Pen(Brushes.Blue);
             p2.Color = System.Drawing.Color.LightGray;
             p2.Width = 6;
-            g.DrawLine(p2, new Point(2, 454), new Point(537, 454));
+            g.DrawLine(p2, new Point(2, height + heightOther-2), new Point(width + widthOther, height + heightOther-2));
 
             Pen p3 = new Pen(Brushes.Blue);
             p3.Color = System.Drawing.Color.LightGray;
             p3.Width = 6;
-            g.DrawLine(p3, new Point(534, 454), new Point(534, 5));
+            g.DrawLine(p3, new Point(width + widthOther-3, height + heightOther-2), new Point(width + widthOther-3, 5));
 
             Pen p4 = new Pen(Brushes.Blue);
             p4.Color = System.Drawing.Color.LightGray;
             p4.Width = 7;
-            g.DrawLine(p4, new Point(2, 45), new Point(537, 45));
+            g.DrawLine(p4, new Point(2, 45), new Point(width + widthOther, 45));
 
             Pen p5 = new Pen(Brushes.Blue);
             p5.Color = System.Drawing.Color.LightGray;
             p5.Width = 32;
-            g.DrawLine(p5, new Point(10, 25), new Point(530, 25));
+            g.DrawLine(p5, new Point(10, 25), new Point(width + widthOther-7, 25));
 
-            
-
-            this.pictureBox1.Image = ImageUtil.startFaceImage;
-
-            //this.pictureBox2.Image = ImageUtil.timeImage1;
-            //this.pictureBox3.Image = ImageUtil.timeImage5;
-            //this.pictureBox33.Image = ImageUtil.timeImage0;
-            mineCount();
-            this.pictureBox4.Image = ImageUtil.timeImage0;
-            this.pictureBox5.Image = ImageUtil.timeImage0;
-            this.pictureBox6.Image = ImageUtil.timeImage0;
-            this.pictureBox7.Image = ImageUtil.timeImage0;
-
-            
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void faceBox_MouseDown(object sender, MouseEventArgs e)
         {
-            this.pictureBox1.Image = ImageUtil.pressFaceImage;
+            this.faceBox.Image = ImageUtil.pressFaceImage;
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void faceBox_MouseUp(object sender, MouseEventArgs e)
         {
-            
-            this.pictureBox1.Image = ImageUtil.startFaceImage;
             resetGame();
-            timer.Stop();
-            this.pictureBox5.Image = ImageUtil.timeImage0;
-            this.pictureBox4.Image = ImageUtil.timeImage0;
-            this.pictureBox7.Image = ImageUtil.timeImage0;
-            this.pictureBox6.Image = ImageUtil.timeImage0;
-            
-
         }
-
-
-
-        
-
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void setBox_MouseDown(object sender, MouseEventArgs e)
         {
-
+            this.setBox.Image = ImageUtil.pressSetImage;
         }
 
+        private void setBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.setBox.Image = ImageUtil.defaultSetImage;
+            if (this.userSetForm == null) {
+                this.userSetForm = new UserSetForm();
+                this.userSetForm.minesweeperForm = this;
+            }
+            this.userSetForm.StartPosition = this.StartPosition;
+            this.userSetForm.ShowDialog();
+        }
+
+
+        /**
+         * 雷区鼠标按下事件 
+         **/
         private void pb_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -136,7 +146,7 @@ namespace Minesweeper
                 if (this.gameState != 2 && (sender as PictureBox).Image == ImageUtil.mineImage)
                 {
                     (sender as PictureBox).Image = ImageUtil.mineDownImage;
-                    this.pictureBox1.Image = ImageUtil.frontFaceImage;
+                    this.faceBox.Image = ImageUtil.frontFaceImage;
                 }
             }
             else if (e.Button == MouseButtons.Middle)
@@ -147,9 +157,9 @@ namespace Minesweeper
                     int mine = int.Parse((sender as PictureBox).Name);
                     if (thisMines != 0)
                     {
-                        int[] aroundMines = getAroundMines(mine);
-                        dict11 = new Dictionary<int, Image>();
-                        foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                        int[] aroundMines = MinesUtil.getAroundMines(mine,this.minesSet.XCount);
+                        dictTmp = new Dictionary<int, Image>();
+                        foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
                         {
                             foreach (int b in aroundMines)
                             {
@@ -157,7 +167,7 @@ namespace Minesweeper
                                 {
                                     if (kvp.Value.Image == ImageUtil.mineImage || kvp.Value.Image == ImageUtil.mineQImage)
                                     {
-                                        dict11.Add(b, kvp.Value.Image);
+                                        dictTmp.Add(b, kvp.Value.Image);
                                         kvp.Value.Image = ImageUtil.mineDownImage;
                                     }
                                    
@@ -168,24 +178,26 @@ namespace Minesweeper
                 }
             }
 
-            }
+        }
 
+        /**
+         * 雷区鼠标松开事件 
+         **/
         private void pb_MouseUp(object sender, MouseEventArgs e)
         {
             
-
                 if (e.Button == MouseButtons.Right)
             {
                 if (this.gameState == 1)
                 {
                     if ((sender as PictureBox).Image == ImageUtil.mineImage) {
                         (sender as PictureBox).Image = ImageUtil.mineTagImage;
-                        this.mineTotal--;
+                        this.currentTotalMines--;
                     }
                     else if ((sender as PictureBox).Image == ImageUtil.mineTagImage)
                     {
                         (sender as PictureBox).Image = ImageUtil.mineQImage;
-                        this.mineTotal++;
+                        this.currentTotalMines++;
                     }
                     else if ((sender as PictureBox).Image == ImageUtil.mineQImage)
                     {
@@ -202,19 +214,18 @@ namespace Minesweeper
                     this.gameState = 1;
                     this.gameTime = 0;
 
-                    mines = getRandomNum(mineTotal, 1, 520, minenum);//从520个地雷区里随机分配150个真实地雷
-                    staticMineTotal = mineTotal;                                         // foreach (int a in mines) { ImageUtil.writeLog(a+""); }                
+                    this.initMines = MinesUtil.getRandomMines(this.initTotalMines, this.initMinesMap.Length, minenum);//随机分配地雷
                     timer.Start();
                     //(sender as PictureBox).Image = ImageUtil.mineDownImage;
-                    this.pictureBox1.Image = ImageUtil.startFaceImage;
+                    this.faceBox.Image = ImageUtil.startFaceImage;
                     checkMine(sender);
                 }
                 else if (this.gameState == 1 && (sender as PictureBox).Image == ImageUtil.mineDownImage)
                 {
                     bool ismine = false;
-                    foreach (int a in mines)
+                    foreach (int m in this.initMines)
                     {
-                        if (minenum == a)
+                        if (minenum == m)
                         {
                             ismine = true;
                         }
@@ -222,19 +233,19 @@ namespace Minesweeper
                     }
                     if (ismine)
                     {
-                        this.pictureBox1.Image = ImageUtil.failFaceImage;
+                        this.faceBox.Image = ImageUtil.failFaceImage;
                         (sender as PictureBox).Image = ImageUtil.minImage;
-                        foreach (int a in mines)
+                        foreach (int m in this.initMines)
                         {
-                            if (minenum != a)
+                            if (minenum != m)
                             {
-                                foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                                foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
                                 {
                                     if (kvp.Value.Image == ImageUtil.mineTagImage)
                                     {
                                         bool sfmine = false;
-                                        foreach (int aa in mines) {
-                                            if (kvp.Value.Name.Equals("" + aa)) {
+                                        foreach (int mn in this.initMines) {
+                                            if (kvp.Value.Name.Equals("" + mn)) {
                                                 sfmine = true;
                                                 break;
                                             }
@@ -244,7 +255,7 @@ namespace Minesweeper
                                         }
                                     }
                                     else {
-                                        if (kvp.Value.Name.Equals(a + ""))
+                                        if (kvp.Value.Name.Equals(m + ""))
                                         {
                                             kvp.Value.Image = ImageUtil.minImage1;
 
@@ -263,10 +274,10 @@ namespace Minesweeper
                     else
                     {
                         (sender as PictureBox).Image = ImageUtil.mineDownImage;
-                        this.pictureBox1.Image = ImageUtil.startFaceImage;
+                        this.faceBox.Image = ImageUtil.startFaceImage;
                         checkMine(sender);
                         if (checkSuccess()) {
-                            this.pictureBox1.Image = ImageUtil.successFaceImage;
+                            this.faceBox.Image = ImageUtil.successFaceImage;
                             timer.Stop();
                             this.gameState = 2;
                             MessageBox.Show("恭喜您，通关成功！");
@@ -283,10 +294,10 @@ namespace Minesweeper
                     int thisMines = ImageUtil.getMineCount((sender as PictureBox).Image);
                     int mine = int.Parse((sender as PictureBox).Name);
                     if (thisMines != 0) {
-                        int[] aroundMines = getAroundMines(mine);
-                        foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                        int[] aroundMines = MinesUtil.getAroundMines(mine,this.minesSet.XCount);
+                        foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
                         {
-                            foreach (KeyValuePair<int, Image> kvp1 in dict11) {
+                            foreach (KeyValuePair<int, Image> kvp1 in dictTmp) {
                                 if (kvp.Value.Name.Equals(""+kvp1.Key)) {
                                     kvp.Value.Image = kvp1.Value;
                                 }
@@ -297,7 +308,7 @@ namespace Minesweeper
                         int count = 0;
                         int num = 0;
                         Dictionary<int, PictureBox> dict1 = new Dictionary<int, PictureBox>();
-                        foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                        foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
                         {
                             foreach (int b in aroundMines) {
                                 if (kvp.Value.Name.Equals(b + ""))
@@ -335,7 +346,7 @@ namespace Minesweeper
             int minenum = int.Parse(picture.Name);
 
             bool ismine = false;
-            foreach (int a in mines)
+            foreach (int a in this.initMines)
             {
                 if (minenum == a)
                 {
@@ -345,18 +356,18 @@ namespace Minesweeper
             }
             if (ismine)
             {
-                this.pictureBox1.Image = ImageUtil.failFaceImage;
+                this.faceBox.Image = ImageUtil.failFaceImage;
                 picture.Image = ImageUtil.minImage;
-                foreach (int a in mines)
+                foreach (int a in this.initMines)
                 {
                     if (minenum != a)
                     {
-                        foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                        foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
                         {
                             if (kvp.Value.Image == ImageUtil.mineTagImage)
                             {
                                 bool sfmine = false;
-                                foreach (int aa in mines)
+                                foreach (int aa in this.initMines)
                                 {
                                     if (kvp.Value.Name.Equals("" + aa))
                                     {
@@ -389,11 +400,11 @@ namespace Minesweeper
             else
             {
                 picture.Image = ImageUtil.mineDownImage;
-                this.pictureBox1.Image = ImageUtil.startFaceImage;
+                this.faceBox.Image = ImageUtil.startFaceImage;
                 checkMine(picture);
                 if (checkSuccess())
                 {
-                    this.pictureBox1.Image = ImageUtil.successFaceImage;
+                    this.faceBox.Image = ImageUtil.successFaceImage;
                    
                     timer.Stop();
                     this.gameState = 2;
@@ -403,13 +414,13 @@ namespace Minesweeper
         }
         private bool checkSuccess() {
             int tag = 0;
-            foreach (KeyValuePair<int, PictureBox> kvp in dict)
+            foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
             {
                 if (kvp.Value.Image == ImageUtil.mineImage || kvp.Value.Image == ImageUtil.mineTagImage || kvp.Value.Image == ImageUtil.mineQImage) {
                     tag++;
                 }
             }
-            if (tag == staticMineTotal)
+            if (tag == this.initTotalMines)
             {
                 return true;
             }
@@ -421,9 +432,9 @@ namespace Minesweeper
             try {
                 int mine = int.Parse((sender as PictureBox).Name);
                 int countmines = 0;//周围雷数
-                int[] aroundMines = getAroundMines(mine);
+                int[] aroundMines = MinesUtil.getAroundMines(mine,this.minesSet.XCount);
                 
-                foreach (int a in mines)
+                foreach (int a in this.initMines)
                 {
                     foreach (int b in aroundMines)
                     {
@@ -445,7 +456,7 @@ namespace Minesweeper
                     {
                         if (emine != mine && emine != 0)
                         {
-                            foreach (KeyValuePair<int, PictureBox> kvp in dict)
+                            foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
                             {
                                 if (kvp.Value.Name.Equals(emine + "") && kvp.Value.Image == ImageUtil.mineImage)
                                 {
@@ -480,11 +491,11 @@ namespace Minesweeper
             {
                 times = "0" + times;
             }
-            char[] aa = times.ToCharArray();
-            this.pictureBox5.Image = ImageUtil.getTimeImage(int.Parse(aa[0] + ""));
-            this.pictureBox4.Image = ImageUtil.getTimeImage(int.Parse(aa[1] + ""));
-            this.pictureBox7.Image = ImageUtil.getTimeImage(int.Parse(aa[2] + ""));
-            this.pictureBox6.Image = ImageUtil.getTimeImage(int.Parse(aa[3] + ""));
+            char[] ts = times.ToCharArray();
+            this.secondThousandBox.Image = ImageUtil.getTimeImage(int.Parse(ts[0] + ""));
+            this.secondHundredBox.Image = ImageUtil.getTimeImage(int.Parse(ts[1] + ""));
+            this.secondTenBox.Image = ImageUtil.getTimeImage(int.Parse(ts[2] + ""));
+            this.secondOneBox.Image = ImageUtil.getTimeImage(int.Parse(ts[3] + ""));
            
         }
 
@@ -493,21 +504,21 @@ namespace Minesweeper
             //timer.Stop();
             
             
-            if (this.mineTotal < 0)
+            if (this.currentTotalMines < 0)
             {
-                string mines = -this.mineTotal + "";
+                string mines = -this.currentTotalMines + "";
                 if (mines.Length == 1)
                 {
                     mines = "0" + mines;
                 }
                 
-                char[] aa = mines.ToCharArray();
-                this.pictureBox2.Image = ImageUtil.timeImageF;
-                this.pictureBox3.Image = ImageUtil.getTimeImage(int.Parse(aa[0] + ""));
-                this.pictureBox33.Image = ImageUtil.getTimeImage(int.Parse(aa[1] + ""));
+                char[] ms = mines.ToCharArray();
+                this.mineNumOneBox.Image = ImageUtil.timeImageF;
+                this.mineNumTenBox.Image = ImageUtil.getTimeImage(int.Parse(ms[0] + ""));
+                this.mineNumHundredBox.Image = ImageUtil.getTimeImage(int.Parse(ms[1] + ""));
             }
             else {
-                string mines = this.mineTotal + "";
+                string mines = this.currentTotalMines + "";
                 if (mines.Length == 1)
                 {
                     mines = "00" + mines;
@@ -516,80 +527,96 @@ namespace Minesweeper
                 {
                     mines = "0" + mines;
                 }
-                char[] aa = mines.ToCharArray();
-                this.pictureBox2.Image = ImageUtil.getTimeImage(int.Parse(aa[0] + ""));
-                this.pictureBox3.Image = ImageUtil.getTimeImage(int.Parse(aa[1] + ""));
-                this.pictureBox33.Image = ImageUtil.getTimeImage(int.Parse(aa[2] + ""));
+                char[] ms = mines.ToCharArray();
+                this.mineNumOneBox.Image = ImageUtil.getTimeImage(int.Parse(ms[0] + ""));
+                this.mineNumTenBox.Image = ImageUtil.getTimeImage(int.Parse(ms[1] + ""));
+                this.mineNumHundredBox.Image = ImageUtil.getTimeImage(int.Parse(ms[2] + ""));
             }
-            
-           
-            
-
         }
-        public int[] getRandomNum(int num, int minValue, int maxValue,int num1)
-        {
-            if ((maxValue + 1 - minValue - num < 0))
-                maxValue += num - (maxValue + 1 - minValue);
-            Random ra = new Random(unchecked((int)DateTime.Now.Ticks));
-            int[] arrNum = new int[num];
-            int tmp = 0;
-            StringBuilder sb = new StringBuilder(num * maxValue.ToString().Trim().Length);
-            sb.Append("#" + num1.ToString().Trim() + "#");
-            for (int i = 0; i <= num - 1; i++)
+       
+        /**
+         * 重置游戏
+         **/
+        public void resetGame() {
+            this.faceBox.Image = ImageUtil.startFaceImage;
+            this.secondThousandBox.Image = ImageUtil.timeImage0;
+            this.secondHundredBox.Image = ImageUtil.timeImage0;
+            this.secondTenBox.Image = ImageUtil.timeImage0;
+            this.secondOneBox.Image = ImageUtil.timeImage0;
+            foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
             {
-                tmp = ra.Next(minValue, maxValue);
-                while (sb.ToString().Contains("#" + tmp.ToString().Trim() + "#"))
-                    tmp = ra.Next(minValue, maxValue + 1);
-                arrNum[i] = tmp;
-                sb.Append("#" + tmp.ToString().Trim() + "#");
-            }
-            return arrNum;
-        }
-        private void resetGame() {
-            foreach (KeyValuePair<int, PictureBox> kvp in dict)
-            {
-
                 kvp.Value.Image = ((System.Drawing.Image)(ImageUtil.mineImage));
-               
             }
             this.gameState = 0;
-            this.mineTotal = 100;
+            this.currentTotalMines = this.minesSet.TotalMines;
             this.gameTime = 0;
             mineCount();
+            timer.Stop();
         }
 
-        private int[] getAroundMines(int mine) {
-            int x = mine / 26 + (mine % 26 > 0 ? 1 : 0);
-            int frontX = x - 1;
-            int afterX = x + 1;
-            int[] aroundMines = new int[9];
-            if (frontX > 0)
+        /**
+         * 根据minesSet动态布局棋盘
+         * **/
+        public void updateLayout() {
+            int widthOther = 17;
+            int heightOther = 58;
+            int totalMinesMap = this.minesSet.XCount * this.minesSet.YCount;
+            this.currentTotalMines = this.minesSet.TotalMines;
+            this.initTotalMines = this.currentTotalMines;
+            this.initMinesMap = new int[totalMinesMap];
+            this.faceBox.Location = new System.Drawing.Point(((widthOther + this.minesSet.XCount * 20) - 80) / 2, 12);
+            this.setBox.Location = new System.Drawing.Point(this.faceBox.Location.X+36, 12);
+            this.secondOneBox.Location = new System.Drawing.Point(((widthOther + this.minesSet.XCount * 20) - 30), 13);
+            this.secondTenBox.Location = new System.Drawing.Point(this.secondOneBox.Location.X - 13, 13);
+            this.secondHundredBox.Location = new System.Drawing.Point(this.secondTenBox.Location.X - 13, 13);
+            this.secondThousandBox.Location = new System.Drawing.Point(this.secondHundredBox.Location.X - 13, 13);
+            this.ClientSize = new System.Drawing.Size(widthOther + this.minesSet.XCount * 20, heightOther + this.minesSet.YCount*20);
+            if (totalMinesMap > 0) {
+                foreach (KeyValuePair<int, PictureBox> kvp in minesDict) {
+                    kvp.Value.Dispose();
+                }
+                this.minesDict.Clear();
+            }
+            for (int i = 0; i < totalMinesMap; i++)
             {
-                aroundMines[0] = mine - 27 < (frontX - 1) * 26 + 1 ? 0 : mine - 27;
-                aroundMines[1] = mine - 26;
-                aroundMines[2] = mine - 25 > (frontX - 1) * 26 + 26 ? 0 : mine - 25;
+                this.minesDict.Add(i, new System.Windows.Forms.PictureBox());
             }
-            else {
-                aroundMines[0] = 0;
-                aroundMines[1] = 0;
-                aroundMines[2] = 0;
-            }
-            aroundMines[3] = mine - 1 < (x - 1) * 26 + 1 ? 0 : mine - 1;
-            aroundMines[4] = 0;
-            aroundMines[5] = mine + 1 > (x - 1) * 26 + 26 ? 0 : mine + 1;
-            if (afterX > 0)
+            int f = 0;
+            int n = 0;
+            int m = 0;
+            foreach (KeyValuePair<int, PictureBox> kvp in minesDict)
             {
-                aroundMines[6] = mine + 25 < (afterX - 1) * 26 + 1 ? 0 : mine + 25;
-                aroundMines[7] = mine + 26;
-                aroundMines[8] = mine + 27 > (afterX - 1) * 26 + 26 ? 0 : mine + 27;
+                n++;
+
+                ((System.ComponentModel.ISupportInitialize)(kvp.Value)).BeginInit();
+                // 
+                // pb
+                // 
+                kvp.Value.Image = ((System.Drawing.Image)(ImageUtil.mineImage));
+                kvp.Value.Location = new System.Drawing.Point(10 + f, 50 + m);
+                kvp.Value.Size = new System.Drawing.Size(20, 20);
+                kvp.Value.Name = "" + n;
+                kvp.Value.TabStop = false;
+                kvp.Value.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pb_MouseDown);
+                kvp.Value.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pb_MouseUp);
+                this.Controls.Add(kvp.Value);
+                ((System.ComponentModel.ISupportInitialize)(kvp.Value)).EndInit();
+                f = f + 20;
+                if (n % this.minesSet.XCount == 0)
+                {
+                    f = 0;
+                    m = m + 20;
+                }
             }
-            else
-            {
-                aroundMines[6] = 0;
-                aroundMines[7] = 0;
-                aroundMines[8] = 0;
-            }
-            return aroundMines;
+            this.resetGame();
+        }
+
+        /**
+         * 观察者模式，用户设置更新，动态改变布局
+         * **/
+        public void update()
+        {
+            this.updateLayout();
         }
     }
 }
