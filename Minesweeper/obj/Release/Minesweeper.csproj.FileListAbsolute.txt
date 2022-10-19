@@ -8,3 +8,4 @@ D:\workspace\c#\Minesweeper\Minesweeper\obj\Release\Minesweeper.csproj.GenerateR
 D:\workspace\c#\Minesweeper\Minesweeper\obj\Release\Minesweeper.csproj.CoreCompileInputs.cache
 D:\workspace\c#\Minesweeper\Minesweeper\obj\Release\Minesweeper.exe
 D:\workspace\c#\Minesweeper\Minesweeper\obj\Release\Minesweeper.pdb
+D:\workspace\c#\Minesweeper\Minesweeper\obj\Release\Minesweeper.csproj.AssemblyReference.cache
