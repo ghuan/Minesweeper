@@ -9,7 +9,7 @@ namespace Minesweeper
     class MinesUtil
     {
         /**
-         * 获取当前雷区的周围雷区
+         * 获取当前点击雷区的周围雷区
          * **/
         public static int[] getAroundMines(int mine,int mineXCount)
         {

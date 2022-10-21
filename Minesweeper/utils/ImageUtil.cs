@@ -212,15 +212,5 @@ namespace Minesweeper
                  
         }
 
-        public static void writeLog(string str)
-        {
-
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Windows.Forms.Application.StartupPath + "\\log.txt", true))
-            {
-                file.WriteLine(str);// 直接追加文件末尾，换行
-                file.Flush();
-                file.Close();
-            }
-        }
     }
 }
