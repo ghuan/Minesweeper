@@ -48,6 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="command\MineBoxMouseMidUpCommand.cs" />
+    <Compile Include="command\MineBoxMouseRightUpCommand.cs" />
+    <Compile Include="command\MineBoxMouseMidDownCommand.cs" />
+    <Compile Include="command\MineBoxMouseLeftUpCommand.cs" />
+    <Compile Include="command\MineBoxMouseLeftDownCommand.cs" />
+    <Compile Include="command\SetBoxMouseUpCommand.cs" />
+    <Compile Include="command\SetBoxMouseDownCommand.cs" />
+    <Compile Include="command\FaceBoxMouseUpCommand.cs" />
+    <Compile Include="command\FaceBoxMouseDownCommand.cs" />
+    <Compile Include="command\MouseEventCommand.cs" />
+    <Compile Include="command\MouseEventInvoker.cs" />
+    <Compile Include="command\MouseUpDown.cs" />
     <Compile Include="observer\MinesSet.cs" />
     <Compile Include="observer\UserSetObservable.cs" />
     <Compile Include="observer\UserSetObserver.cs" />
@@ -66,7 +78,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="utils\MinesUtil.cs" />
+    <Compile Include="utils\MinesweeperBuilder.cs" />
     <Compile Include="utils\OperateIniFile.cs" />
     <EmbeddedResource Include="MinesweeperForm.resx">
       <DependentUpon>MinesweeperForm.cs</DependentUpon>

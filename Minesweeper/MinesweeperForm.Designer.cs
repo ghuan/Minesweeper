@@ -34,6 +34,8 @@ namespace Minesweeper
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinesweeperForm));
+            this.builder = new MinesweeperBuilder(this);
+
             this.minesSet = new MinesSet();
             this.minesSet.addObserver(this);
             this.faceBox = new System.Windows.Forms.PictureBox();
@@ -54,6 +56,16 @@ namespace Minesweeper
             ((System.ComponentModel.ISupportInitialize)(this.secondTenBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondHundredBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondThousandBox)).BeginInit();
+            //初始化装载命令
+            this.mouseEventInvoker.bindCommand(this.faceBox, MouseUpDown.DOWN, MouseButtons.Left, new FaceBoxMouseDownCommand(this));
+            this.mouseEventInvoker.bindCommand(this.faceBox, MouseUpDown.DOWN, MouseButtons.Right, new FaceBoxMouseDownCommand(this));
+            this.mouseEventInvoker.bindCommand(this.faceBox, MouseUpDown.UP, MouseButtons.Left, new FaceBoxMouseUpCommand(this));
+            this.mouseEventInvoker.bindCommand(this.faceBox, MouseUpDown.UP, MouseButtons.Right, new FaceBoxMouseUpCommand(this));
+            this.mouseEventInvoker.bindCommand(this.setBox, MouseUpDown.DOWN, MouseButtons.Left, new SetBoxMouseDownCommand(this));
+            this.mouseEventInvoker.bindCommand(this.setBox, MouseUpDown.DOWN, MouseButtons.Right, new SetBoxMouseDownCommand(this));
+            this.mouseEventInvoker.bindCommand(this.setBox, MouseUpDown.UP, MouseButtons.Left, new SetBoxMouseUpCommand(this));
+            this.mouseEventInvoker.bindCommand(this.setBox, MouseUpDown.UP, MouseButtons.Right, new SetBoxMouseUpCommand(this));
+
             this.SuspendLayout();
             // 
             // faceBox
@@ -63,8 +75,8 @@ namespace Minesweeper
             this.faceBox.Size = new System.Drawing.Size(25, 24);
             this.faceBox.TabIndex = 0;
             this.faceBox.TabStop = false;
-            this.faceBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.faceBox_MouseDown);
-            this.faceBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.faceBox_MouseUp);
+            this.faceBox.MouseDown += this.mouseEventInvoker.callMouseDownEvent;
+            this.faceBox.MouseUp += this.mouseEventInvoker.callMouseUpEvent;
             // 
             // setBox
             // 
@@ -73,8 +85,8 @@ namespace Minesweeper
             this.setBox.Size = new System.Drawing.Size(25, 24);
             this.setBox.TabIndex = 0;
             this.setBox.TabStop = false;
-            this.setBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.setBox_MouseDown);
-            this.setBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.setBox_MouseUp);
+            this.setBox.MouseDown += this.mouseEventInvoker.callMouseDownEvent;
+            this.setBox.MouseUp += this.mouseEventInvoker.callMouseUpEvent;
             // 
             // mineNumOneBox
             // 
@@ -165,44 +177,50 @@ namespace Minesweeper
             ((System.ComponentModel.ISupportInitialize)(this.secondTenBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondHundredBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondThousandBox)).EndInit();
-            this.ResumeLayout(false);
+            this.ResumeLayout(false);            
 
         }
 
         #endregion        
 
-        private System.Windows.Forms.PictureBox faceBox;
-        private System.Windows.Forms.PictureBox setBox;
-        private System.Windows.Forms.PictureBox mineNumOneBox;
-        private System.Windows.Forms.PictureBox mineNumTenBox;
-        private System.Windows.Forms.PictureBox mineNumHundredBox;
-        private System.Windows.Forms.PictureBox secondHundredBox;
-        private System.Windows.Forms.PictureBox secondThousandBox;
-        private System.Windows.Forms.PictureBox secondOneBox;
-        private System.Windows.Forms.PictureBox secondTenBox;
+        public System.Windows.Forms.PictureBox faceBox;
+        public System.Windows.Forms.PictureBox setBox;
+        public System.Windows.Forms.PictureBox mineNumOneBox;
+        public System.Windows.Forms.PictureBox mineNumTenBox;
+        public System.Windows.Forms.PictureBox mineNumHundredBox;
+        public System.Windows.Forms.PictureBox secondHundredBox;
+        public System.Windows.Forms.PictureBox secondThousandBox;
+        public System.Windows.Forms.PictureBox secondOneBox;
+        public System.Windows.Forms.PictureBox secondTenBox;
+        //计时
+        public System.Timers.Timer timer = new System.Timers.Timer();
+        //构造类
+        public MinesweeperBuilder builder;
         //游戏状态 0未开始 1进行中 2结束
-        private int gameState = 0;
+        public int gameState = 0;
         //游戏时间
-        private int gameTime = 0;
+        public int gameTime = 0;
         //游戏设置
         public MinesSet minesSet;
         //雷区PictureBox缓存
-        private Dictionary<int, PictureBox> minesDict = new Dictionary<int, PictureBox>();
+        public Dictionary<int, PictureBox> minesDict = new Dictionary<int, PictureBox>();
         //当前地雷数
-        private int currentTotalMines;
+        public int currentTotalMines;
         //初始化地雷数
-        private int initTotalMines;
+        public int initTotalMines;
         //初始化雷区（包括无雷区）
-        private int[] initMinesMap;
+        public int[] initMinesMap;
         //初始化雷区
-        private int[] initMines;
+        public int[] initMines;
         //配置文件名
         public string setFileName = "set.ini";
         public string defaultSetIniFileSection = "default";
         //设置窗口
-        private UserSetForm userSetForm;
+        public UserSetForm userSetForm;
 
-        private Dictionary<int, Image> dictTmp;
+        public Dictionary<int, Image> dictTmp;
+        //命令调用者
+        private MouseEventInvoker mouseEventInvoker = new MouseEventInvoker();
     }
 
 }

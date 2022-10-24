@@ -29,7 +29,7 @@ namespace Minesweeper
                     OperateIniFile.WriteIniData(this.minesweeperForm.defaultSetIniFileSection, kvp.Key, kvp.Value
                         , AppDomain.CurrentDomain.BaseDirectory + "\\" + this.minesweeperForm.setFileName);
                 }
-                this.minesweeperForm.resetGame();
+                this.minesweeperForm.builder.resetGame();
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
